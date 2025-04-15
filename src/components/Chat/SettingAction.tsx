@@ -103,15 +103,12 @@ export default function SettingAction() {
               />
             </SettingItem>
           </div>
-          <hr class="my-1 bg-slate-5 bg-op-15 border-none h-1px"></hr>
+          <hr class="my-1 bg-slate-5 bg-op-15 border-none h-1px" />
         </Match>
         <Match when={actionState.showSetting === "session"}>
           <div class="<sm:max-h-10em max-h-14em overflow-y-auto">
             <Show when={store.sessionId !== "index"}>
-              <SettingItem
-                icon="i-carbon:text-annotation-toggle"
-                label="Conversation Title"
-              >
+              <SettingItem icon="i-carbon:text-annotation-toggle" label="Conversation Title">
                 <input
                   type="text"
                   value={store.sessionSettings.title}
@@ -126,10 +123,7 @@ export default function SettingAction() {
                 />
               </SettingItem>
             </Show>
-            <SettingItem
-              icon="i-carbon:machine-learning-model"
-              label="OpenAI Model"
-            >
+            <SettingItem icon="i-carbon:machine-learning-model" label="OpenAI Model">
               <Selector
                 class="max-w-150px"
                 value={store.sessionSettings.model}
@@ -140,7 +134,7 @@ export default function SettingAction() {
                     (e.target as HTMLSelectElement).value as SimpleModel
                   )
                 }}
-                options=[
+                options={[
                   {
                     value: "gpt-4o-mini",
                     label: "gpt-4o-mini"
@@ -149,7 +143,7 @@ export default function SettingAction() {
                     value: "gpt-4o",
                     label: "gpt-4o"
                   }
-                ]
+                ]}
               />
             </SettingItem>
             <SettingItem icon="i-carbon:data-enrichment" label="Creativity Level">
@@ -185,10 +179,7 @@ export default function SettingAction() {
                 }}
               />
             </SettingItem>
-            <SettingItem
-              icon="i-carbon:3d-curve-auto-colon"
-              label="Enable Continuous Dialogue"
-            >
+            <SettingItem icon="i-carbon:3d-curve-auto-colon" label="Enable Continuous Dialogue">
               <SwitchButton
                 checked={store.sessionSettings.continuousDialogue}
                 onChange={e => {
@@ -201,10 +192,9 @@ export default function SettingAction() {
               />
             </SettingItem>
           </div>
-          <hr class="my-1 bg-slate-5 bg-op-15 border-none h-1px"></hr>
+          <hr class="my-1 bg-slate-5 bg-op-15 border-none h-1px" />
         </Match>
       </Switch>
-      <!-- restante do código continua igual -->
     </div>
   )
 }
