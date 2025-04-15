@@ -167,7 +167,7 @@ export default function ({
               onClick={stopStreamFetch}
             >
               <span class="dark:text-slate text-slate-7">
-                AI is thinking / {shownTokens(store.currentMessageToken)} / ${store.currentMessageToken$.toFixed(4)}
+                Thinking... / {shownTokens(store.currentMessageToken)} / ${store.currentMessageToken$.toFixed(4)}
               </span>
             </div>
           }
