@@ -16,8 +16,8 @@ import SlashSelector from "./SlashSelector"
 import { useNavigate } from "@solidjs/router"
 import { throttle } from "@solid-primitives/scheduled"
 
-// 3em
 export const defaultInputBoxHeight = 48
+
 export default function ({
   width,
   height,
@@ -35,6 +35,7 @@ export default function ({
   const [compositionend, setCompositionend] = createSignal(true)
   const navigate = useNavigate()
   const { store, setStore } = RootStore
+
   onMount(() => {
     import("~/utils/parse").then(({ parsePrompts }) => {
       FZFData.promptOptions = parsePrompts().map(
@@ -121,7 +122,6 @@ export default function ({
   }, 100)
 
   async function handleInput() {
-    // 重新设置高度，让输入框可以自适应高度，-1 是为了标记不是初始状态
     setHeight(defaultInputBoxHeight - 1)
     batch(() => {
       setSuitableheight()
@@ -167,8 +167,7 @@ export default function ({
               onClick={stopStreamFetch}
             >
               <span class="dark:text-slate text-slate-7">
-                AI 正在思考 / {shownTokens(store.currentMessageToken)} / $
-                {store.currentMessageToken$.toFixed(4)}
+                AI is thinking / {shownTokens(store.currentMessageToken)} / ${store.currentMessageToken$.toFixed(4)}
               </span>
             </div>
           }
@@ -181,14 +180,13 @@ export default function ({
             <textarea
               ref={el => setStore("inputRef", el)}
               id="input"
-              placeholder="与 ta 对话吧"
+              placeholder="Say something..."
               autocomplete="off"
               autocapitalize="off"
               autofocus={false}
               wrap="hard"
               spellcheck={false}
               value={store.inputContent}
-              // autofocus
               onClick={scrollToBottom}
               onKeyDown={e => {
                 if (e.isComposing) return
@@ -252,7 +250,7 @@ export default function ({
             </Show>
             <div class="absolute right-0.5em bottom-0.8em flex items-center">
               <button
-                title="发送"
+                title="Send"
                 onClick={() => sendMessage(undefined, actionState.fakeRole)}
                 class="i-carbon:send-filled text-1.5em text-slate-7 dark:text-slate text-op-80! hover:text-op-100!"
               />
