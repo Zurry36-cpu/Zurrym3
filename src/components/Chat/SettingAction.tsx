@@ -62,7 +62,7 @@ export default function SettingAction() {
       <Switch>
         <Match when={actionState.showSetting === "global"}>
           <div class="<sm:max-h-10em max-h-14em overflow-y-auto">
-            <SettingItem icon="i-ri:lock-password-line" label="网站访问密码">
+            <SettingItem icon="i-ri:lock-password-line" label="Website Access Password">
               <input
                 type="password"
                 value={store.globalSettings.password}
@@ -90,7 +90,7 @@ export default function SettingAction() {
                 }}
               />
             </SettingItem>
-            <SettingItem icon="i-carbon:keyboard" label="Enter 键发送消息">
+            <SettingItem icon="i-carbon:keyboard" label="Press Enter to Send">
               <SwitchButton
                 checked={store.globalSettings.enterToSend}
                 onChange={e => {
@@ -110,7 +110,7 @@ export default function SettingAction() {
             <Show when={store.sessionId !== "index"}>
               <SettingItem
                 icon="i-carbon:text-annotation-toggle"
-                label="对话标题"
+                label="Conversation Title"
               >
                 <input
                   type="text"
@@ -128,7 +128,7 @@ export default function SettingAction() {
             </Show>
             <SettingItem
               icon="i-carbon:machine-learning-model"
-              label="OpenAI 模型"
+              label="OpenAI Model"
             >
               <Selector
                 class="max-w-150px"
@@ -140,7 +140,7 @@ export default function SettingAction() {
                     (e.target as HTMLSelectElement).value as SimpleModel
                   )
                 }}
-                options={[
+                options=[
                   {
                     value: "gpt-4o-mini",
                     label: "gpt-4o-mini"
@@ -149,10 +149,10 @@ export default function SettingAction() {
                     value: "gpt-4o",
                     label: "gpt-4o"
                   }
-                ]}
+                ]
               />
             </SettingItem>
-            <SettingItem icon="i-carbon:data-enrichment" label="思维发散程度">
+            <SettingItem icon="i-carbon:data-enrichment" label="Creativity Level">
               <div class="flex items-center justify-between w-150px">
                 <input
                   type="range"
@@ -173,7 +173,7 @@ export default function SettingAction() {
                 </span>
               </div>
             </SettingItem>
-            <SettingItem icon="i-carbon:save-image" label="记录对话内容">
+            <SettingItem icon="i-carbon:save-image" label="Save Conversation">
               <SwitchButton
                 checked={store.sessionSettings.saveSession}
                 onChange={e => {
@@ -187,7 +187,7 @@ export default function SettingAction() {
             </SettingItem>
             <SettingItem
               icon="i-carbon:3d-curve-auto-colon"
-              label="开启连续对话"
+              label="Enable Continuous Dialogue"
             >
               <SwitchButton
                 checked={store.sessionSettings.continuousDialogue}
@@ -213,7 +213,7 @@ export default function SettingAction() {
               )
             }}
             icon="i-carbon:settings"
-            label="全局设置"
+            label="Global Settings"
           />
           <ActionItem
             onClick={() => {
@@ -222,7 +222,7 @@ export default function SettingAction() {
               )
             }}
             icon="i-carbon:settings-services"
-            label="对话设置"
+            label="Session Settings"
           />
         </div>
         <Switch
@@ -236,7 +236,7 @@ export default function SettingAction() {
                   })
                 }}
                 icon={roleIcons[actionState.fakeRole]}
-                label="伪装角色"
+                label="Fake Role"
               />
               <ActionItem
                 onClick={async () => {
@@ -245,10 +245,10 @@ export default function SettingAction() {
                   setTimeout(() => setActionState("genImg", "normal"), 1000)
                 }}
                 icon={imgIcons[actionState.genImg]}
-                label="导出图片"
+                label="Export Image"
               />
               <ActionItem
-                label="导出MD"
+                label="Export MD"
                 onClick={async () => {
                   await exportMD(store.messageList)
                   setActionState("success", "markdown")
@@ -278,7 +278,7 @@ export default function SettingAction() {
                     ? "i-carbon:checkmark animate-bounce text-red-6 dark:text-red"
                     : "i-carbon:clean"
                 }
-                label={actionState.clearSessionConfirm ? "确定" : "清空对话"}
+                label={actionState.clearSessionConfirm ? "Confirm" : "Clear Conversation"}
               />
             </div>
           }
@@ -286,12 +286,12 @@ export default function SettingAction() {
           <Match when={actionState.showSetting === "global"}>
             <div class="flex">
               <ActionItem
-                label="导出"
+                label="Export"
                 onClick={exportData}
                 icon="i-carbon:export"
               />
               <ActionItem
-                label="导入"
+                label="Import"
                 onClick={importData}
                 icon="i-carbon:download"
               />
@@ -310,7 +310,7 @@ export default function SettingAction() {
                     lastVisit: Date.now(),
                     settings: {
                       ...defaultEnv.CLIENT_SESSION_SETTINGS,
-                      title: "新的对话"
+                      title: "New Conversation"
                     },
                     messages: []
                   })
@@ -318,7 +318,7 @@ export default function SettingAction() {
                   loadSession(sessionID)
                 }}
                 icon="i-carbon:add-alt"
-                label="新的对话"
+                label="New Conversation"
               />
               <Show when={store.sessionId !== "index"}>
                 <ActionItem
@@ -334,7 +334,7 @@ export default function SettingAction() {
                       ? "i-carbon:status-resolved dark:text-yellow text-yellow-6"
                       : "i-carbon:link"
                   }
-                  label="复制链接"
+                  label="Copy Link"
                 />
                 <ActionItem
                   onClick={() => {
@@ -356,7 +356,7 @@ export default function SettingAction() {
                       ? "i-carbon:checkmark animate-bounce text-red-6 dark:text-red"
                       : "i-carbon:trash-can"
                   }
-                  label={actionState.deleteSessionConfirm ? "确定" : "删除对话"}
+                  label={actionState.deleteSessionConfirm ? "Confirm" : "Delete Conversation"}
                 />
               </Show>
             </div>
