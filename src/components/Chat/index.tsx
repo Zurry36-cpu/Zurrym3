@@ -20,6 +20,7 @@ export default function () {
   const [searchParams] = useSearchParams()
   const q = searchParams[SearchParamKey]
   const { store, setStore } = RootStore
+
   onMount(() => {
     createResizeObserver(containerRef, ({ width }, el) => {
       if (el === containerRef) setContainerWidth(`${width}px`)
@@ -122,13 +123,13 @@ export default function () {
         if (store.remainingToken < 0) {
           throw new Error(
             store.sessionSettings.continuousDialogue
-              ? "本次对话过长，请清除之前部分对话或者缩短当前提问。"
-              : "当前提问太长了，请缩短。"
+              ? "This conversation is too long. Please clear part of the previous messages or shorten your question."
+              : "Your question is too long. Please shorten it."
           )
         }
         setStore("loading", true)
         controller = new AbortController()
-        // 在关闭连续对话时，有效上下文只包含了锁定的对话。
+        // When continuous conversation is off, only locked messages are used as context.
         await fetchGPT(
           store.sessionSettings.continuousDialogue
             ? store.validContext
@@ -175,7 +176,7 @@ export default function () {
     }
     const data = response.body
     if (!data) {
-      throw new Error("没有返回数据")
+      throw new Error("No response data")
     }
     const reader = data.getReader()
     const decoder = new TextDecoder("utf-8")
