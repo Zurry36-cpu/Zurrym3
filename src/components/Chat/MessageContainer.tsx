@@ -14,7 +14,8 @@ export default function ({
   inputBoxHeight: Accessor<number>
 }) {
   const { store } = RootStore
-  // 防止重新设置高度时页面跳动
+
+  // Prevent page jump when resetting height
   const paddingBottom = createMemo(
     k =>
       inputBoxHeight() === defaultInputBoxHeight - 1 ? k : inputBoxHeight(),
@@ -28,7 +29,7 @@ export default function ({
     return store.messageList.length
   })
 
-  createEffect(prev => {
+  createEffect(() => {
     if (store.currentAssistantMessage) scrollToBottom()
   })
 
@@ -79,14 +80,14 @@ export default function ({
             when={store.inputContentToken}
             fallback={
               <span class="mx-1 text-slate/40">
-                {`有效上下文 Tokens : ${shownTokens(
+                {`Context Tokens: ${shownTokens(
                   store.contextToken
                 )}/$${store.contextToken$.toFixed(4)}`}
               </span>
             }
           >
             <span class="mx-1 text-slate/40">
-              {`有效上下文+提问 Tokens : ${shownTokens(
+              {`Context + Question Tokens: ${shownTokens(
                 store.contextToken + store.inputContentToken
               )}(`}
               <span
@@ -101,7 +102,7 @@ export default function ({
               )}`}
             </span>
           </Show>
-          <hr class="flex-1  border-slate/30" />
+          <hr class="flex-1 border-slate/30" />
         </div>
       </Show>
     </div>
